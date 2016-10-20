@@ -54,6 +54,7 @@ public class MovieArrayAdapter extends ArrayAdapter<Movie> {
 
         Picasso.with(getContext())
                 .load(movie.getPosterPath())
+                .placeholder(R.drawable.progress_animation)
                 .error(R.drawable.ic_error)
                 .into(viewHolder.moviePoster);
 
