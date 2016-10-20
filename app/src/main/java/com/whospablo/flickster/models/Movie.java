@@ -15,13 +15,15 @@ import java.util.ArrayList;
 
 public class Movie implements Parcelable {
     private String posterPath;
+    private String backdropPath;
     private String originalTitle;
     private String overview;
 
-    Movie(JSONObject jsonObject) throws JSONException{
+    private Movie(JSONObject jsonObject) throws JSONException{
         this.posterPath = jsonObject.getString("poster_path");
         this.originalTitle = jsonObject.getString("original_title");
         this.overview = jsonObject.getString("overview");
+        this.backdropPath = jsonObject.getString("backdrop_path");
     }
 
     public static ArrayList<Movie> fromJSONArray(JSONArray array){
@@ -34,8 +36,11 @@ public class Movie implements Parcelable {
                 e.printStackTrace();
             }
         }
-
         return results;
+    }
+
+    public String getBackdropPath(){
+        return String.format("https://image.tmdb.org/t/p/w1280/%s",  backdropPath);
     }
 
     public String getPosterPath() {
@@ -58,14 +63,18 @@ public class Movie implements Parcelable {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(originalTitle);
-        dest.writeString(posterPath);
         dest.writeString(overview);
+        dest.writeString(posterPath);
+        dest.writeString(backdropPath);
+
     }
 
-    Movie(Parcel in){
+    private Movie(Parcel in){
         this.originalTitle = in.readString();
-        this.posterPath = in.readString();
         this.overview = in.readString();
+        this.posterPath = in.readString();
+        this.backdropPath = in.readString();
+
     }
 
     public static final Parcelable.Creator<Movie> CREATOR = new Parcelable.Creator<Movie>() {

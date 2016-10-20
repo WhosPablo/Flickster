@@ -1,6 +1,7 @@
 package com.whospablo.flickster.adapters;
 
 import android.content.Context;
+import android.content.res.Configuration;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,6 +35,8 @@ public class MovieArrayAdapter extends ArrayAdapter<Movie> {
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder viewHolder;
 
+
+
         if( convertView == null ){
             viewHolder = new ViewHolder();
 
@@ -51,10 +54,18 @@ public class MovieArrayAdapter extends ArrayAdapter<Movie> {
 
         viewHolder.movieTitle.setText(movie.getTitle());
         viewHolder.movieOverview.setText(movie.getOverview());
+
+        String path = movie.getPosterPath();
+
+        if(getContext().getResources().getConfiguration().orientation
+                == Configuration.ORIENTATION_LANDSCAPE){
+            path = movie.getBackdropPath();
+        }
+
         Picasso.with(getContext())
-                .load(movie.getPosterPath())
-                .placeholder(R.drawable.progress_animation)
-                .error(R.drawable.ic_error)
+                .load(path)
+                .placeholder(R.drawable.ic_movie)
+                .error(R.drawable.ic_movie)
                 .into(viewHolder.moviePoster);
 
         return convertView;
