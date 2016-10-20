@@ -27,7 +27,7 @@ public class MovieArrayAdapter extends ArrayAdapter<Movie> {
     }
 
     public MovieArrayAdapter(Context context, List<Movie> movies) {
-        super(context, R.layout.movie_row, movies);
+        super(context, R.layout.row_movie_list, movies);
     }
 
     @Override
@@ -37,7 +37,7 @@ public class MovieArrayAdapter extends ArrayAdapter<Movie> {
         if( convertView == null ){
             viewHolder = new ViewHolder();
 
-            convertView = LayoutInflater.from(getContext()).inflate(R.layout.movie_row, parent,  false);
+            convertView = LayoutInflater.from(getContext()).inflate(R.layout.row_movie_list, parent,  false);
             viewHolder.movieTitle = (TextView) convertView.findViewById(R.id.movie_title_tv);
             viewHolder.movieOverview = (TextView) convertView.findViewById(R.id.movie_overview_tv);
             viewHolder.moviePoster = (ImageView) convertView.findViewById(R.id.movie_poster_iv);
@@ -51,7 +51,6 @@ public class MovieArrayAdapter extends ArrayAdapter<Movie> {
 
         viewHolder.movieTitle.setText(movie.getTitle());
         viewHolder.movieOverview.setText(movie.getOverview());
-
         Picasso.with(getContext())
                 .load(movie.getPosterPath())
                 .placeholder(R.drawable.progress_animation)

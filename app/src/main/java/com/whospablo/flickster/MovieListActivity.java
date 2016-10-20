@@ -4,7 +4,7 @@ import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+import android.view.View;
 import android.widget.ListView;
 
 import com.loopj.android.http.AsyncHttpClient;
@@ -22,7 +22,7 @@ import java.util.ArrayList;
 import cz.msebera.android.httpclient.Header;
 import cz.msebera.android.httpclient.client.utils.URIBuilder;
 
-public class MovieStreamActivity extends AppCompatActivity {
+public class MovieListActivity extends AppCompatActivity {
 
     private static final String LIST_STATE = "LIST_STATE";
     private static final String LIST = "MOVIE_LIST";
@@ -36,12 +36,14 @@ public class MovieStreamActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle state) {
         super.onCreate(state);
-        setContentView(R.layout.activity_movie_stream);
+        setContentView(R.layout.activity_movie_list);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+
 
         mMoviesListView = (ListView) findViewById(R.id.movie_list_view);
+        View view = (View) getLayoutInflater().inflate(R.layout.header_movie_list, null);
+        mMoviesListView.addHeaderView(view);
+        mMoviesListView.setHeaderDividersEnabled(false);
         swipeContainer = (SwipeRefreshLayout) findViewById(R.id.swipe_container);
         swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override

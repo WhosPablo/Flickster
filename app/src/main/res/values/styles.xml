@@ -28,8 +28,10 @@
     <!-- This configures the styles for the title within the Toolbar  -->
     <style name="AppTheme.Toolbar.TitleText" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
         <item name="android:textColor">@color/colorAccent</item>
+        <item name="android:fontFamily">sans-serif</item>
         <item name="android:textSize">22sp</item>
-        <item name="android:textStyle">italic</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textStyle">italic|bold</item>
     </style>
 
 </resources>
