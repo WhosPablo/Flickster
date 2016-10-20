@@ -1,6 +1,7 @@
 package com.whospablo.flickster;
 
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.ListView;
@@ -22,21 +23,21 @@ import cz.msebera.android.httpclient.client.utils.URIBuilder;
 
 public class MovieStreamActivity extends AppCompatActivity {
 
+    private static final String LIST_STATE = "LIST_STATE";
+    private static final String LIST = "MOVIE_LIST";
     private ArrayList<Movie> mMovies;
     private MovieArrayAdapter mMovieArrayAdapter;
     private ListView mMoviesListView;
     private SwipeRefreshLayout swipeContainer;
-
+    private Parcelable mScrollState;
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    protected void onCreate(Bundle state) {
+        super.onCreate(state);
         setContentView(R.layout.activity_movie_stream);
 
-        initializeGlobalVariables();
-        fetchMoviesAsync();
-
+        mMoviesListView = (ListView) findViewById(R.id.movie_list_view);
         swipeContainer = (SwipeRefreshLayout) findViewById(R.id.swipe_container);
         swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -49,17 +50,31 @@ public class MovieStreamActivity extends AppCompatActivity {
                 getResources().getColor(R.color.colorAccent),
                 getResources().getColor(R.color.colorPrimary),
                 getResources().getColor(R.color.colorPrimaryDark)
-                );
+        );
 
+        if(state==null || !state.containsKey(LIST_STATE) || !state.containsKey(LIST)){
+            mMovies = new ArrayList<>();
+            mMovieArrayAdapter = new MovieArrayAdapter(this, mMovies);
+            mMoviesListView.setAdapter(mMovieArrayAdapter);
+            fetchMoviesAsync();
+        } else {
+            mMovies = state.getParcelableArrayList(LIST);
+            mMovieArrayAdapter = new MovieArrayAdapter(this, mMovies);
+            mScrollState = state.getParcelable(LIST_STATE);
+            mMoviesListView.setAdapter(mMovieArrayAdapter);
+            mMoviesListView.onRestoreInstanceState(mScrollState);
+        }
 
     }
 
-    private void initializeGlobalVariables() {
-        mMoviesListView = (ListView) findViewById(R.id.movie_list_view);
-        mMovies = new ArrayList<>();
-        mMovieArrayAdapter = new MovieArrayAdapter(this, mMovies);
-        mMoviesListView.setAdapter(mMovieArrayAdapter);
+    @Override
+    protected void onSaveInstanceState(Bundle state) {
+        mScrollState = mMoviesListView.onSaveInstanceState();
+        state.putParcelable(LIST_STATE, mScrollState);
+        state.putParcelableArrayList(LIST, mMovies);
+        super.onSaveInstanceState(state);
     }
+
 
     private void fetchMoviesAsync() {
         try {
@@ -73,11 +88,12 @@ public class MovieStreamActivity extends AppCompatActivity {
                     JSONArray movieJSONResults = null;
                     try {
                         movieJSONResults = response.getJSONArray("results");
-
+                        mMovies.clear();
                         mMovies.addAll(Movie.fromJSONArray(movieJSONResults));
                         mMovieArrayAdapter.notifyDataSetChanged();
 
                         swipeContainer.setRefreshing(false);
+
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
