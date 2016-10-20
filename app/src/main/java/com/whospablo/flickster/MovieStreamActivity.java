@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.widget.ListView;
 
 import com.loopj.android.http.AsyncHttpClient;
@@ -36,6 +37,9 @@ public class MovieStreamActivity extends AppCompatActivity {
     protected void onCreate(Bundle state) {
         super.onCreate(state);
         setContentView(R.layout.activity_movie_stream);
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
         mMoviesListView = (ListView) findViewById(R.id.movie_list_view);
         swipeContainer = (SwipeRefreshLayout) findViewById(R.id.swipe_container);
