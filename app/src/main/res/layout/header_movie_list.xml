@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <TextView
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:text="@string/app_name"
+    android:text="@string/app_name_spaced"
     android:layout_width="match_parent"
     android:layout_height="?attr/actionBarSize"
     android:id="@+id/movieListHeader"
@@ -9,7 +9,6 @@
     android:paddingTop="@dimen/header_vertical_margin"
     android:paddingLeft="@dimen/header_horizontal_margin"
     android:paddingRight="@dimen/header_horizontal_margin"
-    android:paddingBottom="@dimen/header_vertical_margin"
-    android:background="#000000"/>
+    android:paddingBottom="@dimen/header_vertical_margin"/>
 
 

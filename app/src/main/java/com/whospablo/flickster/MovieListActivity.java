@@ -43,7 +43,7 @@ public class MovieListActivity extends AppCompatActivity {
         mMoviesListView = (ListView) findViewById(R.id.movie_list_view);
         View view = (View) getLayoutInflater().inflate(R.layout.header_movie_list, null);
         mMoviesListView.addHeaderView(view);
-        mMoviesListView.setHeaderDividersEnabled(false);
+//        mMoviesListView.setHeaderDividersEnabled(false);
         swipeContainer = (SwipeRefreshLayout) findViewById(R.id.swipe_container);
         swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
