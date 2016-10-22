@@ -19,6 +19,17 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".MovieDetailsActivity"
+            android:label="Details"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:parentActivityName=".MovieListActivity" >
+            <!-- The meta-data element is needed for versions lower than 4.1 -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MovieListActivity" />
+        </activity>
     </application>
 
 </manifest>

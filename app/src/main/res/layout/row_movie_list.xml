@@ -5,7 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:id="@+id/row_movie_list_root"
-    android:clickable="true"
     android:foreground="?attr/selectableItemBackground">
 
     <ImageView
@@ -13,11 +12,11 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_height="wrap_content"
-        android:maxHeight="230dp"
+        android:maxHeight="@dimen/movie_backdrop_height"
         android:layout_width="0dp"
         app:layout_widthPercent="50%"
         tools:src="@mipmap/ic_launcher"
-        android:id="@+id/movie_poster_iv"
+        android:id="@+id/row_movie_poster_iv"
         android:contentDescription="@string/movieposter"
         android:adjustViewBounds="true"
         android:background="@android:color/transparent"
@@ -25,12 +24,12 @@
     <View
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_alignTop="@id/movie_poster_iv"
-        android:layout_alignLeft="@id/movie_poster_iv"
-        android:layout_alignStart="@id/movie_poster_iv"
-        android:layout_alignRight="@id/movie_poster_iv"
-        android:layout_alignEnd="@id/movie_poster_iv"
-        android:layout_alignBottom="@id/movie_poster_iv"
+        android:layout_alignTop="@id/row_movie_poster_iv"
+        android:layout_alignLeft="@id/row_movie_poster_iv"
+        android:layout_alignStart="@id/row_movie_poster_iv"
+        android:layout_alignRight="@id/row_movie_poster_iv"
+        android:layout_alignEnd="@id/row_movie_poster_iv"
+        android:layout_alignBottom="@id/row_movie_poster_iv"
         android:background="@drawable/gradient_shape"/>
 
     <TextView
@@ -44,24 +43,24 @@
         android:layout_height="wrap_content"
         app:layout_widthPercent="70%"
         android:textColor="#FFF"
-        android:text="Title"
-        android:id="@+id/movie_title_tv"
+        android:text="@string/title"
+        android:id="@+id/row_movie_title_tv"
         android:textStyle="normal|bold"
         android:textSize="16sp" />
 
     <TextView
         android:layout_marginLeft="@dimen/row_item_horizontal_margin"
         android:layout_marginStart="@dimen/row_item_horizontal_margin"
-        android:layout_below="@id/movie_title_tv"
+        android:layout_below="@id/row_movie_title_tv"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_alignBottom="@id/movie_poster_iv"
+        android:layout_alignBottom="@id/row_movie_poster_iv"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_widthPercent="70%"
         android:textColor="#999"
-        android:text="Overview"
-        android:id="@+id/movie_overview_tv"
+        android:text="@string/overview"
+        android:id="@+id/row_movie_overview_tv"
         android:maxLines="7"
         android:ellipsize="end"/>
 

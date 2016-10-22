@@ -41,9 +41,9 @@ public class MovieArrayAdapter extends ArrayAdapter<Movie> {
             viewHolder = new ViewHolder();
 
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.row_movie_list, parent,  false);
-            viewHolder.movieTitle = (TextView) convertView.findViewById(R.id.movie_title_tv);
-            viewHolder.movieOverview = (TextView) convertView.findViewById(R.id.movie_overview_tv);
-            viewHolder.moviePoster = (ImageView) convertView.findViewById(R.id.movie_poster_iv);
+            viewHolder.movieTitle = (TextView) convertView.findViewById(R.id.row_movie_title_tv);
+            viewHolder.movieOverview = (TextView) convertView.findViewById(R.id.row_movie_overview_tv);
+            viewHolder.moviePoster = (ImageView) convertView.findViewById(R.id.row_movie_poster_iv);
 
             convertView.setTag(viewHolder);
         } else {
