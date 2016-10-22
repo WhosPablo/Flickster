@@ -18,12 +18,16 @@ public class Movie implements Parcelable {
     private String backdropPath;
     private String originalTitle;
     private String overview;
+    private String releaseDate;
+    private double rating;
 
     private Movie(JSONObject jsonObject) throws JSONException{
         this.posterPath = jsonObject.getString("poster_path");
         this.originalTitle = jsonObject.getString("original_title");
         this.overview = jsonObject.getString("overview");
         this.backdropPath = jsonObject.getString("backdrop_path");
+        this.releaseDate = jsonObject.getString("release_date");
+        this.rating = jsonObject.getDouble("vote_average");
     }
 
     public static ArrayList<Movie> fromJSONArray(JSONArray array){
@@ -55,6 +59,14 @@ public class Movie implements Parcelable {
         return overview;
     }
 
+    public String getReleaseDate() {
+        return releaseDate;
+    }
+
+    public double getRating() {
+        return rating;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -66,6 +78,8 @@ public class Movie implements Parcelable {
         dest.writeString(overview);
         dest.writeString(posterPath);
         dest.writeString(backdropPath);
+        dest.writeString(releaseDate);
+        dest.writeDouble(rating);
 
     }
 
@@ -74,6 +88,8 @@ public class Movie implements Parcelable {
         this.overview = in.readString();
         this.posterPath = in.readString();
         this.backdropPath = in.readString();
+        this.releaseDate = in.readString();
+        this.rating = in.readDouble();
 
     }
 
